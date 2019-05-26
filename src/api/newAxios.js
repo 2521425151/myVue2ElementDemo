@@ -18,3 +18,9 @@ RConfig.interceptors.request.use(
     }
 );
 // 请求后拦截器
+RConfig.interceptors.response.use(
+    response=>{},
+    error=>{}
+);
+
+export default RConfig
