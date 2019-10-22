@@ -1,18 +1,28 @@
 <template>
     <div>
-        homePage
+        {{HPName}}
     </div>
 </template>
 
 <script>
-    export default {
-        name: "homePage",
-        data(){
-            return{
+import { mapActions, mapGetters } from 'vuex'
+export default {
+	name: "homePage",
+	computed:{
+		...mapGetters(['HPName'])
+	},
+	created(){
+		this.setHomePageName('hello personal computer')
+	},
+	data(){
+		return{
 
-            }
-        }
-    }
+		}
+	},
+	methods:{
+		...mapActions(['setHomePageName'])
+	}
+}
 </script>
 
 <style scoped>

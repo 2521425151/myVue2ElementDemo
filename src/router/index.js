@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import homPage from '../view/homePage'
-const homPage = () => import('../view/homePage')
+import homPage from '../view/homePage'
+// const homPage = () => import('../view/homePage')
 Vue.use(Router)
 
 const PCRouter = [
