@@ -3,7 +3,11 @@
         {{HPName}}
         <test-children
             :title.sync="doc.title"
-        ></test-children>
+        >
+            <template v-slot="slotProps">
+                {{slotProps.user.lastName}}
+            </template>
+        </test-children>
     </div>
 </template>
 
@@ -25,6 +29,11 @@ export default {
 		return{
 			doc:{
 				title:'oldTitle'
+            },
+			slotProps:{
+				user:{
+					firstName:'firstName'
+                }
             }
 		}
 	},
