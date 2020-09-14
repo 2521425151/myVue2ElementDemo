@@ -13,7 +13,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import testChildren from '../components/testChildren'
+import testChildren from './testChildren'
 export default {
 	name: "slotTest",
     components:{
