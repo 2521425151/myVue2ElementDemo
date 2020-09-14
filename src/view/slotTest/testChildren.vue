@@ -1,7 +1,7 @@
 <template>
     <div>
         <p>{{title}}</p>
-        <button @click="TCClick">update:title</button>
+        <button @click="TCClick">update</button>
         <slot v-bind:user="user">
             {{user.lastName}}
         </slot>
@@ -20,13 +20,13 @@
             }
         },
         created(){
-			// this.title = 'newTitle'
 			this.$emit('update:title', 'newTitle')
         },
         methods:{
 	        TCClick(){
-		        // this.title = 'TCClick'
-		        this.$emit('update:title', 'TCClick')
+                this.user.lastName = this.user.lastName === 'clickLastName' ? 'lastName' : 'clickLastName';
+                let msg = this.title === 'TCClick' ? 'newTitle' : 'TCClick';
+		        this.$emit('update:title', msg)
             }
         }
 	}

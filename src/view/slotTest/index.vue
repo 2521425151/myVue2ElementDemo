@@ -15,7 +15,7 @@
 import { mapActions, mapGetters } from 'vuex'
 import testChildren from '../components/testChildren'
 export default {
-	name: "homePage",
+	name: "slotTest",
     components:{
 	    testChildren
     },
