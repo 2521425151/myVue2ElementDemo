@@ -1,11 +1,18 @@
 <template>
-	<div>Layout</div>
+	<div>Layout
+		<!-- 自定义 npm test -->
+		<hello-name></hello-name>
+	</div>
 </template>
 
 <script>
-	export default {
-		name: "Layout"
+import helloName from 'hbg-sn-o';
+export default {
+	name: "Layout",
+	components: {
+		helloName
 	}
+}
 </script>
 
 <style scoped>

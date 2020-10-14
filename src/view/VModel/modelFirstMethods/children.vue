@@ -13,7 +13,10 @@
       event: 'cc'
     },
     props: {
-      msg: ''
+      msg: {
+        type: String,
+        default: ''
+      }
     },
     methods: {
       fn2 () {

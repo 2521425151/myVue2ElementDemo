@@ -23,6 +23,7 @@
     "babel-eslint": "^10.0.1",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
+    "hbg-sn-o": "^1.0.3",
     "sass-loader": "^10.0.2",
     "vue-template-compiler": "^2.6.10"
   },
