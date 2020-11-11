@@ -2,6 +2,7 @@
 	<div>Layout
 		<!-- 自定义 npm test -->
 		<hello-name></hello-name>
+		<el-button>ahah</el-button>
 	</div>
 </template>
 
