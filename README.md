@@ -1,4 +1,4 @@
-# my-vue3x
+# vue2-ts-mobile
 
 ## Project setup
 ```
@@ -15,9 +15,9 @@ npm run serve
 npm run build
 ```
 
-### Run your tests
+### Run your unit tests
 ```
-npm run test
+npm run test:unit
 ```
 
 ### Lints and fixes files
@@ -27,10 +27,3 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
-
-# 分支名                 |  解释 
-
-# personalComputerVueObj |  PC端代码
-# official-website       |  Vue官网文档代码
-# principle              |  Vue原理代码
-# moblie_vue3x           |  Vue移动端项目
