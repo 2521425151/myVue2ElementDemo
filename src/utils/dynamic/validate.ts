@@ -1,5 +1,5 @@
 // 验证不为空
-const notEmpty = (rule, value, callback) => {
+const notEmpty = (rule: Array<any>, value: any, callback: Function) => {
   if (value === '' || value === null || value === undefined) {
     callback(new Error('不允许为空'))
   } else {
@@ -8,7 +8,7 @@ const notEmpty = (rule, value, callback) => {
 }
 
 // 邮箱验证
-const email = (rule, value, callback) => {
+const email = (rule: Array<any>, value: any, callback: Function) => {
   const myReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   if (value === '' || value === null || value === undefined) {
     callback(new Error('不允许为空'))
@@ -19,7 +19,7 @@ const email = (rule, value, callback) => {
   }
 }
 // 数组验证
-const array = (rule, value, callback) => {
+const array = (rule: Array<any>, value: any, callback: Function) => {
   if (value.length === 0 || value === null || value === undefined) {
     callback(new Error('不允许为空'))
   } else {

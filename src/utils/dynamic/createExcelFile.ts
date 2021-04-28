@@ -1,4 +1,4 @@
-export default (res, fileName) => {
+export default (res: Blob, fileName: string) => {
   var blob = new Blob([res], { type: 'application/vnd.ms-excel' }) //application/vnd.openxmlformats-officedocument.spreadsheetml.sheet这里表示xlsx类型
   var downloadElement = document.createElement('a')
   var href = window.URL.createObjectURL(blob) //创建下载的链接

@@ -2,12 +2,12 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
-    "strict": true,
+    "strict": true,  // 严格检查
     "jsx": "preserve",
     "importHelpers": true,
     "moduleResolution": "node",
     "experimentalDecorators": true,
-    "skipLibCheck": true,
+    "skipLibCheck": true, // 跳过编译时的类型检查
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,

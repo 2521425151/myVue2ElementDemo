@@ -4,9 +4,9 @@
  * console.log(DIFFTIME('2019-6-30 13:20:00', '2020-10-01 11:20:32', 's'))
  */
 
-export const diffTime = function (startTime, endTime, unit) {
+export const diffTime = function (startTime: Date, endTime: Date, unit: string) {
   // 判断当前月天数
-  function getDays(mouth, year) {
+  function getDays(mouth: number, year: number) {
     let days = 30
     if (mouth === 2) {
       days = year % 4 === 0 ? 29 : 28

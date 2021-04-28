@@ -1,36 +1,31 @@
-// 节流
-export const throttle = (fn: Function, wait: number = 300): Function => {
-  let inThrottle: boolean, lastFn: any, lastTime: number
-  return function () {
-    const context = this
-    let args = arguments
-    if (!inThrottle) {
-      fn.apply(context, args)
-      lastTime = Date.now()
-      inThrottle = true
-    } else {
-      clearTimeout(lastFn)
-      lastFn = setTimeout(() => {
-        if (Date.now() - lastTime >= wait) {
-          fn.apply(context, args)
-          lastTime = Date.now()
-        }
-      }, Math.max(wait - (Date.now() - lastTime), 0))
-    }
+export default class ActionControl {
+  timeout = 0
+  fn: any = null
+  wait = 0
+  preActionTime = 0
+  constructor(fn: any, wait: number) {
+    this.fn = fn
+    this.wait = wait
   }
-}
-// 防抖
-export const debounce = (fn: Function, wait: number = 300): Function => {
-  let lastFn: any
-  return function () {
-    const context = this
-    let args = arguments
-    if (lastFn) {
-      clearTimeout(lastFn)
+  // 防抖
+  debounce(): void {
+    if (this.timeout !== 0) clearTimeout(this.timeout) //清除这个定时器
+    this.timeout = setTimeout(this.fn, this.wait)
+  }
+  // 节流
+  throttle(): void {
+    if (this.preActionTime === 0) {
+      this.preActionTime = new Date().getTime()
+      this.fn()
+    } else {
+      clearTimeout(this.timeout)
+      const timeBetween = new Date().getTime() - this.preActionTime
+      this.timeout = setTimeout(() => {
+        if (timeBetween >= this.wait) {
+          this.fn()
+          this.preActionTime = new Date().getTime()
+        }
+      }, Math.max(this.wait - timeBetween, 0))
     }
-    lastFn = setTimeout(() => {
-      lastFn = null
-      fn.apply(context, args)
-    }, wait)
   }
 }
