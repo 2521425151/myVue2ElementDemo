@@ -6,7 +6,7 @@ import http from './http'
  * @param {object} params - 请求发送数据
  * @returns {promise} - 请求返回promise
  */
-export function sendGet(url: string, params: object = {}, options: object = {}): Promise<any> {
+export function sendGet(url: string, params: object = {}, options: any = {}): Promise<any> {
   return new Promise(async (resolve, reject) => {
     try {
       options['params'] = params

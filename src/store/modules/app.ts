@@ -2,22 +2,30 @@ const state = {
   useName: 'sam'
 }
 const mutations = {
-  change_name(state, anotherName) {
+  change_name(state: { useName: String }, anotherName: String) {
     state.useName = anotherName
   }
 }
 const actions = {
-  changeName({ commit, rootState }, anotherName) {
+  changeName(
+    { commit, rootState }: { commit: Function; rootState: { job: String } },
+    anotherName: String
+  ) {
     if (rootState.job == 'web') {
       commit('change_name', anotherName)
     }
   },
-  alertName({ state }) {
+  alertName({ state }: { state: { useName: String } }) {
     alert(state.useName)
   }
 }
 const getters = {
-  localJobTitle(state, getters, rootState, rootGetters) {
+  localJobTitle(
+    state: Object,
+    getters: Object,
+    rootState: { job: String },
+    rootGetters: { jobTitle: String }
+  ) {
     return rootGetters.jobTitle + ' aka ' + rootState.job
   }
 }
