@@ -13,10 +13,15 @@ const routes: RouteConfig[] = [
   {
     path: '/about',
     name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+    // 这将为该路由生成一个单独的块 about[hash].js
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+  },
+  {
+    path: '/login',
+    name: 'login',
+    // webpackMode 的默认值为 lazy 它会使所有异步模块都会被单独抽离成单一的 chunk
+    // 若设置该值为 lazy-once，Webpack 就会将所有带有标记的异步加载模块放在同一个 chunk 中。
+    component: () => import(/* webpackMode: lazy-once */ '../views/About.vue')
   }
 ]
 // 使用 require.context 动态加载modules文件的 router 模块
