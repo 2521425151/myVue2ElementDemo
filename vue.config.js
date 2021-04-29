@@ -89,7 +89,7 @@ module.exports = {
   },
   devServer: {
     open: false, // 自动启动浏览器
-    host: 'localhost', // 主机
+    host: '0.0.0.0', // 主机
     port: 8181,
     https: false,
     // hot: true, // 热更新：报错->改正-> 刷新
