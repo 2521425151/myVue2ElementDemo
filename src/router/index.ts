@@ -17,6 +17,12 @@ const routes: RouteConfig[] = [
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
   {
+    path: '/copyTableToExcel',
+    name: 'copyTableToExcel',
+    // 这将为该路由生成一个单独的块 about[hash].js
+    component: () => import(/* webpackChunkName: "about" */ '../views/copyTableToExcel.vue')
+  },
+  {
     path: '/login',
     name: 'login',
     // webpackMode 的默认值为 lazy 它会使所有异步模块都会被单独抽离成单一的 chunk
