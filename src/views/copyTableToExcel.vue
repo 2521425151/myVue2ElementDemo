@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="isShow">
     <button class="btn" data-clipboard-target="#CTable" @click="copy">copy table</button>
     <table id="CTable" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em">
       <thead>
@@ -198,13 +198,32 @@
 import Clipboard from 'clipboard'
 export default {
   data() {
-    return {}
+    return {
+      isShow: true
+    }
   },
   methods: {
     copy() {
+      let vm = this
       let clipboardInstance = new Clipboard('.btn', {
         target: function (trigger) {
-          return trigger.nextElementSibling || document.getElementById('CTable')
+          let domTable = trigger.nextElementSibling || document.getElementById('CTable')
+          let cloneTable = domTable.cloneNode(true)
+          let styleDoms = domTable.querySelectorAll('[style]')
+          for (let i = 0; i < styleDoms.length; i++) {
+            if (styleDoms[i].getAttribute('style').includes('padding')) {
+              styleDoms[i].setAttribute(
+                'style',
+                styleDoms[i].getAttribute('style').replace(/padding.*px\;/g, '')
+              )
+            }
+          }
+          vm.isShow = false
+          vm.$nextTick(() => {
+            domTable = cloneTable.cloneNode(true)
+            vm.isShow = true
+          })
+          return domTable
         }
       })
 
