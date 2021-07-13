@@ -1,7 +1,7 @@
 <template>
-  <div v-if="isShow">
-    <button class="btn" data-clipboard-target="#CTable" @click="copy">copy table</button>
-    <table id="CTable" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em">
+  <div>
+    <button class="btn" data-clipboard-target="#CTable" @click="copy(deletePadding)">copy table</button>
+    <table class="CTable" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em">
       <thead>
         <tr>
           <td colspan="4" style="text-align: left">
@@ -198,45 +198,56 @@
 import Clipboard from 'clipboard'
 export default {
   data() {
-    return {
-      isShow: true
-    }
+    return {}
   },
   methods: {
-    copy() {
+    deletePadding(dom) {
+      // Clipboard js 需要目标DOM 存在于当前document中；
+      // 所以需要把拷贝的目标DOM添加到当前documnet中并隐藏
+      dom.style.opacity = 0.7
+      dom.style.position = 'absolute'
+      dom.style.top = '-9px'
+      document.body.appendChild(dom)
+      let styleDoms = dom.querySelectorAll('[style]')
+      for (let i = 0; i < styleDoms.length; i++) {
+        if (styleDoms[i].getAttribute('style').includes('padding')) {
+          styleDoms[i].setAttribute(
+            'style',
+            styleDoms[i].getAttribute('style').replace(/padding.*px\;/g, '')
+          )
+        }
+      }
+      return dom
+    },
+    filterData(dom, cb) {
+      if (cb) {
+        return cb(dom)
+      }
+      return dom
+    },
+    copy(cb) {
       let vm = this
+      let domTable = document.getElementsByClassName('CTable')[0]
+      //  需要去除table下td标签的padding，为了不影响页面 需靠克隆，目标标签
+      let cloneTable = domTable.cloneNode(true)
+      // 初始化
       let clipboardInstance = new Clipboard('.btn', {
         target: function (trigger) {
-          let domTable = trigger.nextElementSibling || document.getElementById('CTable')
-          let cloneTable = domTable.cloneNode(true)
-          let styleDoms = domTable.querySelectorAll('[style]')
-          for (let i = 0; i < styleDoms.length; i++) {
-            if (styleDoms[i].getAttribute('style').includes('padding')) {
-              styleDoms[i].setAttribute(
-                'style',
-                styleDoms[i].getAttribute('style').replace(/padding.*px\;/g, '')
-              )
-            }
-          }
-          vm.isShow = false
-          vm.$nextTick(() => {
-            domTable = cloneTable.cloneNode(true)
-            vm.isShow = true
-          })
-          return domTable
+          return vm.filterData(cloneTable, cb)
         }
       })
-
       clipboardInstance.on('success', e => {
         console.log('复制成功') //这里你如果引入了elementui的提示就可以用，没有就注释即可
         // 释放内存
         clipboardInstance.destroy()
+        document.body.removeChild(cloneTable)
       })
       clipboardInstance.on('error', e => {
         // 不支持复制
         console.log('该浏览器不支持自动复制')
         // 释放内存
         clipboardInstance.destroy()
+        documnet.body.removeChild(cloneTable)
       })
     }
   }
